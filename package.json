@@ -1,0 +1,23 @@
+{
+  "name": "common-service",
+  "main": "index.js",
+  "scripts": {
+    "start:unsecured": "node index.js",
+    "start:secured": "node index.js --secured",
+    "debug": "node debug index.js",
+    "develop:unsecured": "nodemon index.js",
+    "develop:secured": "nodemon index.js --secured"
+  },
+  "type": "module",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-ws": "^5.0.2",
+    "minimist": "^1.2.8",
+    "nodemon": "^2.0.20",
+    "uuid": "^9.0.0"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Constructor",
+  "version": "1.0",
+  "description": "Сервис бизнес-логики конструктора упражнений",
+  "schemes": [
+    "Exercise"
+  ]
+}
