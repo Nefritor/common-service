@@ -4,7 +4,7 @@ import WSExpress from 'express-ws';
 
 import {getApplication} from './App.js';
 import {getServices, setServices, logServicesInfo} from './Service.js';
-import {getBroadcaster, openWebSocket} from './WebSocket.js';
+import {openWebSocket} from './WebSocket.js';
 
 export const createApplication = async ({name, port, ssl}) => {
     const app = getApplication();
@@ -22,15 +22,12 @@ export const createApplication = async ({name, port, ssl}) => {
                 console.log(`Application "${name}" started on ${port} (unsecured)`);
             });
 
-        const wss = WSExpress(app, server).getWss();
-
-        const broadcast = getBroadcaster(wss);
-
         setServices(app, services);
+
+        const wss = WSExpress(app, server).getWss();
 
         return [
             wss,
-            broadcast,
             (config) => openWebSocket(app, config)
         ];
     } else {

@@ -3,14 +3,14 @@ import {readFile, writeFile} from 'node:fs/promises';
 const getDatabase = async () =>
     JSON.parse(
         await readFile(
-            './database/Constructor/Exercise.json',
+            './database/Exercises.json',
             {encoding: 'utf8'}
         )
     );
 
 const setDatabase = async (data) =>
     await writeFile(
-        './database/Constructor/Exercise.json',
+        './database/Exercises.json',
         JSON.stringify(data)
     );
 
@@ -35,7 +35,7 @@ const updateExercise = async (data) => {
     return setDatabase(database);
 }
 
-const deleteExercise = async (id) => {
+const deleteExercise = async ({id}) => {
     const database = await getDatabase();
     return setDatabase(database.filter((data) => data.id !== id));
 }
