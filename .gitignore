@@ -7,7 +7,7 @@
 /build
 
 # database
-#/database
+/database
 
 # misc
 .DS_Store
