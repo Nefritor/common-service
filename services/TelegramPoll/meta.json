@@ -1,0 +1,9 @@
+{
+  "name": "TelegramPoll",
+  "version": "1.0",
+  "description": "Сервис создания автоматических запланированных опросов в телеграм",
+  "schemes": [
+    "PollAPI",
+    "BotAPI"
+  ]
+}

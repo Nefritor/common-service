@@ -3,13 +3,13 @@ import http from 'http';
 import WSExpress from 'express-ws';
 
 import {getApplication} from './App.js';
-import {getServices, setServices, logServicesInfo} from './Service.js';
+import {getServices, logServicesInfo, setServices} from './Service.js';
 import {openWebSocket} from './WebSocket.js';
 
-export const createApplication = async ({name, port, ssl}) => {
+export const createApplication = async ({ name, port }, ssl) => {
     const app = getApplication();
 
-    const services = await getServices({log: true});
+    const services = await getServices({ log: true });
 
     if (services.length) {
         logServicesInfo(services);
@@ -31,8 +31,8 @@ export const createApplication = async ({name, port, ssl}) => {
             (config) => openWebSocket(app, config)
         ];
     } else {
-        console.warn(`Application "${name}" does not started. There is no known services exist.`)
+        console.warn(`Application "${name}" does not started. There is no known services exist.`);
     }
-}
+};
 
 

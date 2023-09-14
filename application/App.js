@@ -8,7 +8,7 @@ export const getApplication = () => {
     app.use(cors());
 
     return app;
-}
+};
 
 export const setAppRoutes = (app, routes) => {
     routes.forEach((route) => {
@@ -22,12 +22,12 @@ export const setAppRoutes = (app, routes) => {
             default:
                 throw new Error(`Invalid route type: ${route.type}`);
         }
-    })
-}
+    });
+};
 
 const processRequest = (callback) => {
     return (req, res) => {
-        res.header("Content-Type", "application/json; charset=utf-8")
+        res.header("Content-Type", "application/json; charset=utf-8");
         callback({
             data: req.body,
             send: (data) => {
@@ -39,6 +39,6 @@ const processRequest = (callback) => {
                 }
                 return res.status(statusCode).send(statusMessage);
             }
-        })
-    }
-}
+        });
+    };
+};

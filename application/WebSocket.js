@@ -4,8 +4,8 @@ export const getBroadcaster = (wss) =>
             if (!selector || selector(client)) {
                 client.send(JSON.stringify(data));
             }
-        })
-    }
+        });
+    };
 
 export const openWebSocket = (app, config) => {
     app.ws(config.url, (ws, req) => {
@@ -15,6 +15,6 @@ export const openWebSocket = (app, config) => {
         });
         ws.on('close', (code) => {
             config.onClose(ws, code);
-        })
-    })
-}
+        });
+    });
+};

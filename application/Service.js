@@ -9,13 +9,13 @@ export const getServices = async () => {
             JSON.parse(
                 await readFile(
                     `${SERVICES_DIR}/${serviceName}/meta.json`,
-                    {encoding: 'utf8'}
+                    { encoding: 'utf8' }
                 )
             )
-        )
+        );
     }
     return services;
-}
+};
 
 export const logServicesInfo = (services) => {
     console.log(`Found services - ${services.length}`);
@@ -24,9 +24,10 @@ export const logServicesInfo = (services) => {
         const offset = count.replace(/./g, ' ');
         console.log(`${count}${service.name} (v ${service.version})`);
         console.log(`${offset}${service.description}`);
-    })
+        console.log(`${offset}Схемы: ${service.schemes.join(', ')}`);
+    });
     console.log();
-}
+};
 
 export const setServices = (app, services) => {
     app.post('/', async (req, res) => {
@@ -46,16 +47,17 @@ export const setServices = (app, services) => {
         if (!serviceData.schemes.includes(schemeName)) {
             return res.status(404).send(`Unknown scheme ${schemeName}`);
         }
-        const {methods} = await import(`../${SERVICES_DIR}/${serviceData.name}/${schemeName}/router.js`);
+        const { methods } = await import(`../${SERVICES_DIR}/${serviceData.name}/${schemeName}/router.js`);
         const callback = methods[methodName];
         if (!callback) {
             return res.status(404).send(`Unknown method ${methodName}`);
         }
-        const result = await callback(req.body.data)
+        const result = await callback(req.body.data);
+        console.log(result);
         if (result) {
-            res.end(JSON.stringify(result), 'utf-8')
+            res.end(JSON.stringify(result), 'utf-8');
         } else {
             res.sendStatus(200);
         }
     });
-}
+};
