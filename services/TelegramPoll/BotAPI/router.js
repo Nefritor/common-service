@@ -5,12 +5,15 @@ const token = '920518128:AAEh8O5DdOnfvxJkzbU43FLS_7QQP0TH1ng';
 const getBotUrl = () => `https://api.telegram.org/bot${token}/`;
 
 const execute = async ({ method, data }) => {
-    const response = await axios({
+    return axios({
         method: 'post',
         url: getBotUrl() + method,
         data: data
+    }).then((response) => {
+        return response.data;
+    }).catch((error) => {
+        console.log(error);
     });
-    return response.data;
 };
 
 const createPoll = ({ chatId, question, options }) =>

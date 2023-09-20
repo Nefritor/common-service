@@ -6,7 +6,7 @@ const { secured = false } = minimist(process.argv.splice(2));
 
 const appConfig = {
     name: 'Common Service',
-    port: 6278
+    port: 8443
 };
 
 if (secured) {

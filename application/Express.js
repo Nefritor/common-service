@@ -1,10 +1,9 @@
 import https from 'https';
 import http from 'http';
-import WSExpress from 'express-ws';
 
 import {getApplication} from './App.js';
 import {getServices, logServicesInfo, setServices} from './Service.js';
-import {openWebSocket} from './WebSocket.js';
+import {setWebSockets} from './WebSocket.js';
 
 export const createApplication = async ({ name, port }, ssl) => {
     const app = getApplication();
@@ -23,13 +22,7 @@ export const createApplication = async ({ name, port }, ssl) => {
             });
 
         setServices(app, services);
-
-        const wss = WSExpress(app, server).getWss();
-
-        return [
-            wss,
-            (config) => openWebSocket(app, config)
-        ];
+        //await setWebSockets(app, server, services);
     } else {
         console.warn(`Application "${name}" does not started. There is no known services exist.`);
     }

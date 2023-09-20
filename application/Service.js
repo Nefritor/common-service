@@ -1,6 +1,6 @@
 import {readdir, readFile} from 'node:fs/promises';
 
-const SERVICES_DIR = './services';
+import {SERVICES_DIR} from './Constants.js';
 
 export const getServices = async () => {
     const services = [];
@@ -18,7 +18,7 @@ export const getServices = async () => {
 };
 
 export const logServicesInfo = (services) => {
-    console.log(`Found services - ${services.length}`);
+    console.log(`Обнаруженные сервисы - ${services.length}`);
     services.forEach((service, index) => {
         const count = `${index + 1}) `;
         const offset = count.replace(/./g, ' ');
@@ -53,7 +53,7 @@ export const setServices = (app, services) => {
             return res.status(404).send(`Unknown method ${methodName}`);
         }
         const result = await callback(req.body.data);
-        console.log(result);
+
         if (result) {
             res.end(JSON.stringify(result), 'utf-8');
         } else {
