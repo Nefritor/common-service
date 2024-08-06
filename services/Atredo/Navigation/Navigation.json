@@ -1,0 +1,29 @@
+[
+  {
+    "key": "bot",
+    "title": "Bot",
+    "type": "node",
+    "icon": "RobotOutlined"
+  },
+  {
+    "key": "test",
+    "title": "Test",
+    "type": "page",
+    "icon": "UserOutlined",
+    "component": "Application/test"
+  },
+  {
+    "key": "bot-info",
+    "title": "Bot info",
+    "type": "page",
+    "parent": "bot",
+    "component": "Bot/info"
+  },
+  {
+    "key": "bot-command",
+    "title": "Bot command",
+    "type": "page",
+    "parent": "bot",
+    "component": "Bot/command"
+  }
+]

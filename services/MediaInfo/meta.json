@@ -1,0 +1,10 @@
+{
+  "name": "MediaInfo",
+  "version": "1.0",
+  "description": "Сервис получения медиа информации",
+  "schemes": [
+    "Media"
+  ],
+  "web_socket": [],
+  "disabled": true
+}

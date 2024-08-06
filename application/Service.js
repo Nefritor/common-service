@@ -5,14 +5,15 @@ import {SERVICES_DIR} from './Constants.js';
 export const getServices = async () => {
     const services = [];
     for (const serviceName of (await readdir(SERVICES_DIR))) {
-        services.push(
-            JSON.parse(
-                await readFile(
-                    `${SERVICES_DIR}/${serviceName}/meta.json`,
-                    { encoding: 'utf8' }
-                )
+        const serviceMeta = JSON.parse(
+            await readFile(
+                `${SERVICES_DIR}/${serviceName}/meta.json`,
+                { encoding: 'utf8' }
             )
         );
+        if (!serviceMeta.disabled) {
+            services.push(serviceMeta);
+        }
     }
     return services;
 };
@@ -27,6 +28,15 @@ export const logServicesInfo = (services) => {
         console.log(`${offset}Схемы: ${service.schemes.join(', ')}`);
     });
     console.log();
+};
+
+export const initServices = (services) => {
+    services.forEach((service) => {
+        service.schemes.forEach((scheme) => {
+            const location = `./${SERVICES_DIR}/${service.name}/${scheme}`;
+            import(`.${location}/main.js`).then(({ init }) => init?.(location));
+        });
+    });
 };
 
 export const setServices = (app, services) => {
@@ -47,7 +57,7 @@ export const setServices = (app, services) => {
         if (!serviceData.schemes.includes(schemeName)) {
             return res.status(404).send(`Unknown scheme ${schemeName}`);
         }
-        const { methods } = await import(`../${SERVICES_DIR}/${serviceData.name}/${schemeName}/router.js`);
+        const { methods } = await import(`../${SERVICES_DIR}/${serviceData.name}/${schemeName}/main.js`);
         const callback = methods[methodName];
         if (!callback) {
             return res.status(404).send(`Unknown method ${methodName}`);

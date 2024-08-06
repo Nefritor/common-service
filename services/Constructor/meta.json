@@ -4,5 +4,6 @@
   "description": "Сервис бизнес-логики конструктора упражнений",
   "schemes": [
     "Exercise"
-  ]
+  ],
+  "disabled": true
 }

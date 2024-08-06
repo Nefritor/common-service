@@ -1,0 +1,9 @@
+{
+  "name": "Atredo",
+  "version": "1.0",
+  "description": "Сервис приложения Atredo",
+  "schemes": [
+    "Navigation"
+  ],
+  "web_socket": []
+}

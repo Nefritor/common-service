@@ -1,6 +1,6 @@
 import {v4 as uuid} from 'uuid';
 
-import {methods} from '../BotAPI/router.js';
+import {methods} from '../BotAPI/main.js';
 import {getQuestionWithMeta} from './meta.js';
 
 let observerInterval;
